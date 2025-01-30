@@ -207,6 +207,46 @@ body, html {
 #qr-button:hover {
     background-color: #218838;
 }
+
+/* Стили для модального окна QR-кода */
+#qr-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#qr-modal .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+#qr-modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#qr-modal .close:hover {
+    color: #007bff;
+}
+
+#qr-code-container {
+    margin-top: 20px;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -251,4 +291,47 @@ body, html {
 
 .modal-content button:hover {
     background-color: #0056b3;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .input {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    .input input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .input button {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+
+    .join-section {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    .join-section input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .join-section button {
+        width: 100%;
+    }
+
+    .messages {
+        padding: 5px;
+    }
+
+    .message {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
 }

@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalPagesElement = document.getElementById('total-pages');
     const joinButton = document.getElementById('join-button');
     const usernameInputChat = document.getElementById('username-input');
+    const qrModal = document.getElementById('qr-modal');
+    const qrCodeContainer = document.getElementById('qr-code-container');
+    const closeQrModal = document.getElementById('close-qr-modal');
+
 
     let currentUsername = '';
     let sessionId = '';
@@ -139,15 +143,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const qrContainer = document.createElement('div');
-            document.body.appendChild(qrContainer);
-            new QRCode(qrContainer, {
-                text: `https://afraid-walls-hide.loca.lt/chat/${sessionId}`,
+            // Очищаем контейнер QR-кода
+            qrCodeContainer.innerHTML = '';
+
+            // Создаем QR-код
+            new QRCode(qrCodeContainer, {
+                text: `https://witty-points-sniff.loca.lt/chat/${sessionId}`,
                 width: 256,
                 height: 256
             });
+
+            // Показываем модальное окно
+            qrModal.style.display = 'flex';
         });
     }
+
+    // Закрытие модального окна QR-кода
+    if (closeQrModal) {
+        closeQrModal.addEventListener('click', () => {
+            qrModal.style.display = 'none';
+        });
+    }
+
+    // Закрытие модального окна при клике вне его области
+    window.addEventListener('click', (event) => {
+        if (event.target === qrModal) {
+            qrModal.style.display = 'none';
+        }
+    });
 
     // Обработка отправки сообщения
     sendButton.addEventListener('click', sendMessage);

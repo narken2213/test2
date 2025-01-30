@@ -13,11 +13,12 @@
                 <div id="messages" class="messages"></div>
                 <div id="typing-status" class="typing-status"></div>
                 <div class="input">
-                    <input id="username-input" type="text" placeholder="Введите ваше имя..." autocomplete="off" />
-                    <button id="join-button">Присоединиться</button>
                     <input id="chat-input" type="text" placeholder="Введите сообщение..." autocomplete="off" disabled />
                     <button id="send-button" disabled>Отправить</button>
-                    <button id="qr-button">Пригласить через QR-код</button>
+                </div>
+                <div class="join-section">
+                    <input id="username-input" type="text" placeholder="Введите ваше имя..." autocomplete="off" />
+                    <button id="join-button">Присоединиться</button>
                 </div>
             </div>
         </div>
@@ -25,8 +26,6 @@
 
     <!-- Socket.IO -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
-    <!-- QRCode.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <!-- Main JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
