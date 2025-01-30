@@ -41,6 +41,15 @@ def upload():
 
     return jsonify({'success': 'Файл успешно загружен', 'file_url': f"/{file_path}"}), 200
 
+@socketio.on('upload_presentation')
+def handle_upload_presentation(data):
+    session_id = data.get('session_id')
+    file_url = data.get('file_url')
+
+    if session_id in sessions:
+        sessions[session_id]['presentation'] = file_url
+        emit('presentation_status', {'file_url': file_url}, room=session_id)
+
 @socketio.on('connect')
 def handle_connect():
     print(f"Новое подключение: {request.sid}")
@@ -74,7 +83,6 @@ def handle_join_session(data):
     if is_creator:
         emit('presentation_status', {'file_url': sessions[session_id]['presentation']})
 
-
 @socketio.on('disconnect')
 def handle_disconnect():
     for session_id, session_data in sessions.items():
@@ -94,11 +102,15 @@ def handle_message(data):
     session_id = data.get('session_id')
     message = data.get('message', '').strip()
 
+    print(f"Получено сообщение от сессии {session_id}: {message}")  # Логирование
+
     if session_id and message:
         safe_message = html.escape(message)
         username = sessions[session_id]['users'].get(request.sid, "Unknown")
         sessions[session_id]['messages'].append({'username': username, 'message': safe_message})
         emit('receive_message', {'username': username, 'message': safe_message}, room=session_id)
+    else:
+        print("Ошибка: session_id или message отсутствуют.")  # Логирование
 
 @socketio.on('typing')
 def handle_typing(data):
@@ -115,4 +127,4 @@ def handle_stop_typing(data):
         emit('user_stop_typing', {'username': username}, room=session_id, include_self=False)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, host='0.0.0.0', port=3000)
+    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
