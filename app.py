@@ -127,4 +127,4 @@ def handle_stop_typing(data):
         emit('user_stop_typing', {'username': username}, room=session_id, include_self=False)
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
+    socketio.run(app, host='95.163.229.6', port=22, allow_unsafe_werkzeug=True)

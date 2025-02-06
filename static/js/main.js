@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Создаем QR-код
             new QRCode(qrCodeContainer, {
-                text: `https://witty-points-sniff.loca.lt/chat/${sessionId}`,
+                text: `https://95.163.229.6/chat/${sessionId}`,
                 width: 256,
                 height: 256
             });
